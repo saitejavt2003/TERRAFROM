@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GOOGLE_CREDENTIALS = credentials('gcp-service-account') // Jenkins Credential ID
+        GOOGLE_CREDENTIALS = credentials('wise-scene-453411-c9-f7a1505610da.json') 
     }
 
     stages {
