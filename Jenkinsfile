@@ -1,33 +1,57 @@
 pipeline {
     agent any
-
     environment {
-        GOOGLE_CREDENTIALS = credentials('wise-scene-453411-c9-f7a1505610da.json') 
+        
+        GOOGLE_APPLICATION_CREDENTIALS = 'wise-scene-453411-c9-f7a1505610da.json'
     }
-
     stages {
-        stage('Clone Repository') {
+        stage('Checkout SCM') {
             steps {
-                git branch: 'main', url: 'https://github.com/saitejavt2003/TERRAFROM.git'
+                checkout scm
             }
         }
-
-        stage('Initialize Terraform') {
+        stage('Terraform Init') {
             steps {
-                sh 'terraform init'
+                script {
+                    
+                    if (isUnix()) {
+                        sh 'terraform init'
+                    } else {
+                        bat 'terraform init'
+                    }
+                }
             }
         }
-
-        stage('Plan Terraform Changes') {
+        stage('Terraform Plan') {
             steps {
-                sh 'terraform plan'
+                script {
+                    if (isUnix()) {
+                        sh 'terraform plan'
+                    } else {
+                        bat 'terraform plan'
+                    }
+                }
             }
         }
-
-        stage('Apply Terraform Configuration') {
+        stage('Terraform Apply') {
             steps {
-                sh 'terraform apply -auto-approve'
+                script {
+                    if (isUnix()) {
+                        sh 'terraform apply -auto-approve'
+                    } else {
+                        bat 'terraform apply -auto-approve'
+                    }
+                }
             }
+        }
+    }
+    post {
+        always {
+           
+            echo 'Pipeline completed'
+        }
+        failure {
+            echo 'Pipeline failed'
         }
     }
 }
