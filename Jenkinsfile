@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO.git'
+                git branch: 'main', url: 'https://github.com/saitejavt2003/TERRAFROM.git'
             }
         }
 
