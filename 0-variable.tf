@@ -17,7 +17,8 @@ variable "zone" {
 }
 
 variable "bucket_name" {
-  description = "Cloud Storage Bucket Name"
+  description = "Name of the Google Cloud Storage bucket"
   type        = string
-  default     = "my-gcp-bucket-1234"
+  default     = "wise-scene-453411-c91"
 }
+
