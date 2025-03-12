@@ -9,39 +9,21 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 withCredentials([file(credentialsId: 'gcp-service-account-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
-                    script {
-                        if (isUnix()) {
-                            sh 'terraform init'
-                        } else {
-                            bat 'terraform init'
-                        }
-                    }
+                    bat 'terraform init'
                 }
             }
         }
         stage('Terraform Plan') {
             steps {
                 withCredentials([file(credentialsId: 'gcp-service-account-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
-                    script {
-                        if (isUnix()) {
-                            sh 'terraform plan'
-                        } else {
-                            bat 'terraform plan'
-                        }
-                    }
+                    bat 'terraform plan'
                 }
             }
         }
         stage('Terraform Apply') {
             steps {
                 withCredentials([file(credentialsId: 'gcp-service-account-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
-                    script {
-                        if (isUnix()) {
-                            sh 'terraform apply -auto-approve'
-                        } else {
-                            bat 'terraform apply -auto-approve'
-                        }
-                    }
+                    bat 'terraform apply -auto-approve'
                 }
             }
         }
